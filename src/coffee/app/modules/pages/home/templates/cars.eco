@@ -9,7 +9,7 @@
 
 <% if @total > @size : %>
 <div class="ui basic center aligned segment">
-  <a href="/#!/car" class="ui huge red inverted button">
+  <a href="#!/car" class="ui huge red inverted button">
     Показать все
   </a>
 </div>

@@ -4,11 +4,11 @@
   <% end %>
 </div>
 <div class="content">
-  <a href="/#!/car/<%= @id %>" class="header">
+  <a href="#!/car/<%= @id %>" class="header">
     <%= @model %> (<%= @year %> г.)
   </a>
   <div class="meta">
-    <a href="/#!/car/<%= @id %>/edit">
+    <a href="#!/car/<%= @id %>/edit">
       <i class="edit icon"></i>
       Редактировать
     </a>

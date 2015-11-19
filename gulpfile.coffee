@@ -92,7 +92,10 @@ isRev = ->
 ### HTML ###
 gulp.task 'html', ['css', 'js', 'assets'], ->
   gulp.src paths.src.html
-    .pipe inject gulp.src(["#{paths.dest.css}/*.css"]), { ignorePath: "/#{argv.env}" }
+    .pipe inject gulp.src(["#{paths.dest.css}/*.css"]),
+      ignorePath: "/#{argv.env}"
+      relative: true
+
     .pipe version ['html', 'js', 'css']
     .pipe gulpif isProd(), htmlmin
       collapseWhitespace: true

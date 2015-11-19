@@ -2,7 +2,7 @@
   <%= @model %> (<%= @year %> г.)
   <div class="sub header">
     <div class="ui link horizontal list">
-      <a href="/#!/car/<%= @id %>/edit" class="item">
+      <a href="#!/car/<%= @id %>/edit" class="item">
         <i class="edit icon"></i>
         Редактировать
       </a>

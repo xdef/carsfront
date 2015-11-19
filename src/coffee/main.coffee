@@ -1,6 +1,6 @@
 requirejs.config
   urlArgs: "rev=1.0.0"
-  baseUrl: '/js'
+  baseUrl: 'js'
 
   shim:
     'semantic-ui-transition': { deps: ['jquery'],  exports: '$' }
