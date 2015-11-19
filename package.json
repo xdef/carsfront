@@ -26,6 +26,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-eco": "0.0.2",
     "gulp-fingerprint": "^0.3.2",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-htmlmin": "^1.1.4",
     "gulp-if": "^1.2.5",
     "gulp-image": "^1.1.1",

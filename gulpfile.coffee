@@ -27,6 +27,8 @@ fingerprint  = require 'gulp-fingerprint'
 htmlmin      = require 'gulp-htmlmin'
 bower        = require 'gulp-bower'
 rsync        = require 'gulp-rsync'
+ghPages      = require 'gulp-gh-pages'
+del          = require 'del'
 browserSync  = require('browser-sync').create()
 argv         = require('yargs').alias('e', 'env').default('e', 'dev').argv
 
@@ -64,22 +66,6 @@ paths =
   maps: "./#{argv.env}/js/maps"
   manifest: "./#{argv.env}/rev-manifest.json"
 
-deploy =
-  src: paths.dest.self + '/**'
-  options:
-    hostname: 'prezz'
-    username: 'deploy'
-    root: "#{argv.env}"
-    destination: "/srv/www/front_prezz_tv"
-    incremental: true
-    progress: true
-    relative: true
-    emptyDirectories: true
-    recursive: true
-    clean: true,
-    exclude: ['.DS_Store']
-    include: []
-
 
 ### Helpers ###
 isProd = ->
@@ -93,7 +79,7 @@ isRev = ->
 gulp.task 'html', ['css', 'js', 'assets'], ->
   gulp.src paths.src.html
     .pipe inject gulp.src(["#{paths.dest.css}/*.css"]),
-      ignorePath: "/#{argv.env}"
+      ignorePath: "../#{argv.env}/"
       relative: true
 
     .pipe version ['html', 'js', 'css']
@@ -313,10 +299,10 @@ gulp.task 'bower:clean', ->
   del [paths.dest.bower]
 
 
-### RSYNC ###
-gulp.task 'rsync', ->
-  gulp.src deploy.src
-    .pipe rsync deploy.options
+### GH-Pages ###
+gulp.task 'gh-pages', ->
+  gulp.src paths.dest.self + '/**/*'
+    .pipe ghPages()
 
 
 ### Clean ###
@@ -329,7 +315,7 @@ gulp.task 'build', ['html', 'js', 'css', 'assets', 'rev:replace']
 
 
 ### Deploy ###
-gulp.task 'deploy', ['rsync']
+gulp.task 'deploy', ['gh-pages']
 
 
 ### Server ###
