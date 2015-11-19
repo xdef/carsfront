@@ -1,1 +1,5 @@
-define(["app/app","./sync","./model","./collection"],function(n){return n.Entities});
+define(['app/app', './sync', './model', './collection'], function(App) {
+  return App.Entities;
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9iYXNlL2VudGl0aWVzL21haW4uY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQUEsQ0FBTyxDQUNMLFNBREssRUFFTCxRQUZLLEVBR0wsU0FISyxFQUlMLGNBSkssQ0FBUCxFQUtHLFNBQUMsR0FBRDtTQUVELEdBQUcsQ0FBQztBQUZILENBTEgiLCJmaWxlIjoiYXBwL2Jhc2UvZW50aXRpZXMvbWFpbi5qcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyIsInNvdXJjZXNDb250ZW50IjpbImRlZmluZSBbXG4gICdhcHAvYXBwJ1xuICAnLi9zeW5jJ1xuICAnLi9tb2RlbCdcbiAgJy4vY29sbGVjdGlvbidcbl0sIChBcHApIC0+XG5cbiAgQXBwLkVudGl0aWVzXG4iXX0=
