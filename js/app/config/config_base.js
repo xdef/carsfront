@@ -1,1 +1,7 @@
-define(["underscore"],function(e){return e.extend({key:"value"},window.Config)});
+define(['underscore'], function(_) {
+  return _.extend({
+    key: "value"
+  }, window.Config);
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9jb25maWcvY29uZmlnX2Jhc2UuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE1BQUEsQ0FBTyxDQUFDLFlBQUQsQ0FBUCxFQUF1QixTQUFDLENBQUQ7U0FFckIsQ0FBQyxDQUFDLE1BQUYsQ0FDRTtJQUFBLEdBQUEsRUFBSyxPQUFMO0dBREYsRUFHRSxNQUFNLENBQUMsTUFIVDtBQUZxQixDQUF2QiIsImZpbGUiOiJhcHAvY29uZmlnL2NvbmZpZ19iYXNlLmpzIiwic291cmNlUm9vdCI6Ii9zb3VyY2UvIiwic291cmNlc0NvbnRlbnQiOlsiIyBBZGQgcHJvamVjdCBjb25maWd1cmF0aW9uIGhlcmVcbmRlZmluZSBbJ3VuZGVyc2NvcmUnXSwgKF8pIC0+XG5cbiAgXy5leHRlbmRcbiAgICBrZXk6IFwidmFsdWVcIlxuXG4gICwgd2luZG93LkNvbmZpZ1xuIl19

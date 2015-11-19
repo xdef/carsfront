@@ -1,1 +1,43 @@
-define(["backbone","backbone.stickit","jquery.file.upload"],function(){return Backbone.Stickit.addHandler({selector:".uploader",initialize:function(e,t,r){var n,o;return n=_.defaults({},r.defaultOptions,{url:t.url(),type:"POST",dataType:"json",progressInterval:100,bitrateInterval:100,dropZone:e,formData:{}}),o=e.fileupload(_.extend(n,r.uploadOptions)),o.bind("fileuploaddone",function(e,r){return t.trigger("upload:done",r)}),o.bind("fileuploadprogressall",function(e,r){var n;return n=parseInt(r.loaded/r.total*100,10),t.trigger("upload:progress",n)}),o.bind("fileuploadstart",function(e){return function(e,r){return t.trigger("upload:start",r)}}(this)),o.bind("fileuploadstop",function(e){return function(e,r){return t.trigger("upload:stop",r)}}(this)),o.bind("fileuploadfail",function(e,r){return t.trigger("upload:error",r)})},updateModel:!1,updateView:!1})});
+define(['backbone', 'backbone.stickit', 'jquery.file.upload'], function() {
+  return Backbone.Stickit.addHandler({
+    selector: ".uploader",
+    initialize: function($el, model, options) {
+      var defaults, uploader;
+      defaults = _.defaults({}, options.defaultOptions, {
+        url: model.url(),
+        type: "POST",
+        dataType: "json",
+        progressInterval: 100,
+        bitrateInterval: 100,
+        dropZone: $el,
+        formData: {}
+      });
+      uploader = $el.fileupload(_.extend(defaults, options.uploadOptions));
+      uploader.bind('fileuploaddone', function(e, data) {
+        return model.trigger('upload:done', data);
+      });
+      uploader.bind('fileuploadprogressall', function(e, data) {
+        var progress;
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        return model.trigger('upload:progress', progress);
+      });
+      uploader.bind('fileuploadstart', (function(_this) {
+        return function(e, data) {
+          return model.trigger('upload:start', data);
+        };
+      })(this));
+      uploader.bind('fileuploadstop', (function(_this) {
+        return function(e, data) {
+          return model.trigger('upload:stop', data);
+        };
+      })(this));
+      return uploader.bind('fileuploadfail', function(e, data) {
+        return model.trigger('upload:error', data);
+      });
+    },
+    updateModel: false,
+    updateView: false
+  });
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9iYXNlL2JpbmRpbmdzL3VwbG9hZGVyLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFBLENBQU8sQ0FBQyxVQUFELEVBQWEsa0JBQWIsRUFBaUMsb0JBQWpDLENBQVAsRUFBK0QsU0FBQTtTQUM3RCxRQUFRLENBQUMsT0FBTyxDQUFDLFVBQWpCLENBQ0U7SUFBQSxRQUFBLEVBQVUsV0FBVjtJQUVBLFVBQUEsRUFBWSxTQUFDLEdBQUQsRUFBTSxLQUFOLEVBQWEsT0FBYjtBQUVWLFVBQUE7TUFBQSxRQUFBLEdBQVcsQ0FBQyxDQUFDLFFBQUYsQ0FBVyxFQUFYLEVBQWUsT0FBTyxDQUFDLGNBQXZCLEVBQ1Q7UUFBQSxHQUFBLEVBQUssS0FBSyxDQUFDLEdBQU4sQ0FBQSxDQUFMO1FBQ0EsSUFBQSxFQUFNLE1BRE47UUFFQSxRQUFBLEVBQVUsTUFGVjtRQUdBLGdCQUFBLEVBQWtCLEdBSGxCO1FBSUEsZUFBQSxFQUFpQixHQUpqQjtRQUtBLFFBQUEsRUFBVSxHQUxWO1FBTUEsUUFBQSxFQUFVLEVBTlY7T0FEUztNQVNYLFFBQUEsR0FBVyxHQUFHLENBQUMsVUFBSixDQUFlLENBQUMsQ0FBQyxNQUFGLENBQVMsUUFBVCxFQUFtQixPQUFPLENBQUMsYUFBM0IsQ0FBZjtNQUVYLFFBQVEsQ0FBQyxJQUFULENBQWMsZ0JBQWQsRUFBZ0MsU0FBQyxDQUFELEVBQUksSUFBSjtlQUM5QixLQUFLLENBQUMsT0FBTixDQUFjLGFBQWQsRUFBNkIsSUFBN0I7TUFEOEIsQ0FBaEM7TUFHQSxRQUFRLENBQUMsSUFBVCxDQUFjLHVCQUFkLEVBQXVDLFNBQUMsQ0FBRCxFQUFJLElBQUo7QUFDckMsWUFBQTtRQUFBLFFBQUEsR0FBVyxRQUFBLENBQVMsSUFBSSxDQUFDLE1BQUwsR0FBYyxJQUFJLENBQUMsS0FBbkIsR0FBMkIsR0FBcEMsRUFBeUMsRUFBekM7ZUFDWCxLQUFLLENBQUMsT0FBTixDQUFjLGlCQUFkLEVBQWlDLFFBQWpDO01BRnFDLENBQXZDO01BSUEsUUFBUSxDQUFDLElBQVQsQ0FBYyxpQkFBZCxFQUFpQyxDQUFBLFNBQUEsS0FBQTtlQUFBLFNBQUMsQ0FBRCxFQUFJLElBQUo7aUJBQy9CLEtBQUssQ0FBQyxPQUFOLENBQWMsY0FBZCxFQUE4QixJQUE5QjtRQUQrQjtNQUFBLENBQUEsQ0FBQSxDQUFBLElBQUEsQ0FBakM7TUFHQSxRQUFRLENBQUMsSUFBVCxDQUFjLGdCQUFkLEVBQWdDLENBQUEsU0FBQSxLQUFBO2VBQUEsU0FBQyxDQUFELEVBQUksSUFBSjtpQkFDOUIsS0FBSyxDQUFDLE9BQU4sQ0FBYyxhQUFkLEVBQTZCLElBQTdCO1FBRDhCO01BQUEsQ0FBQSxDQUFBLENBQUEsSUFBQSxDQUFoQzthQUdBLFFBQVEsQ0FBQyxJQUFULENBQWMsZ0JBQWQsRUFBZ0MsU0FBQyxDQUFELEVBQUksSUFBSjtlQUM5QixLQUFLLENBQUMsT0FBTixDQUFjLGNBQWQsRUFBOEIsSUFBOUI7TUFEOEIsQ0FBaEM7SUExQlUsQ0FGWjtJQW1DQSxXQUFBLEVBQWEsS0FuQ2I7SUFxQ0EsVUFBQSxFQUFZLEtBckNaO0dBREY7QUFENkQsQ0FBL0QiLCJmaWxlIjoiYXBwL2Jhc2UvYmluZGluZ3MvdXBsb2FkZXIuanMiLCJzb3VyY2VSb290IjoiL3NvdXJjZS8iLCJzb3VyY2VzQ29udGVudCI6WyJkZWZpbmUgWydiYWNrYm9uZScsICdiYWNrYm9uZS5zdGlja2l0JywgJ2pxdWVyeS5maWxlLnVwbG9hZCddLCAtPlxuICBCYWNrYm9uZS5TdGlja2l0LmFkZEhhbmRsZXJcbiAgICBzZWxlY3RvcjogXCIudXBsb2FkZXJcIlxuXG4gICAgaW5pdGlhbGl6ZTogKCRlbCwgbW9kZWwsIG9wdGlvbnMpIC0+XG5cbiAgICAgIGRlZmF1bHRzID0gXy5kZWZhdWx0cyB7fSwgb3B0aW9ucy5kZWZhdWx0T3B0aW9ucyxcbiAgICAgICAgdXJsOiBtb2RlbC51cmwoKVxuICAgICAgICB0eXBlOiBcIlBPU1RcIlxuICAgICAgICBkYXRhVHlwZTogXCJqc29uXCJcbiAgICAgICAgcHJvZ3Jlc3NJbnRlcnZhbDogMTAwXG4gICAgICAgIGJpdHJhdGVJbnRlcnZhbDogMTAwXG4gICAgICAgIGRyb3Bab25lOiAkZWxcbiAgICAgICAgZm9ybURhdGE6IHt9XG5cbiAgICAgIHVwbG9hZGVyID0gJGVsLmZpbGV1cGxvYWQgXy5leHRlbmQoZGVmYXVsdHMsIG9wdGlvbnMudXBsb2FkT3B0aW9ucylcblxuICAgICAgdXBsb2FkZXIuYmluZCAnZmlsZXVwbG9hZGRvbmUnLCAoZSwgZGF0YSkgLT5cbiAgICAgICAgbW9kZWwudHJpZ2dlciAndXBsb2FkOmRvbmUnLCBkYXRhXG5cbiAgICAgIHVwbG9hZGVyLmJpbmQgJ2ZpbGV1cGxvYWRwcm9ncmVzc2FsbCcsIChlLCBkYXRhKSAtPlxuICAgICAgICBwcm9ncmVzcyA9IHBhcnNlSW50KGRhdGEubG9hZGVkIC8gZGF0YS50b3RhbCAqIDEwMCwgMTApXG4gICAgICAgIG1vZGVsLnRyaWdnZXIgJ3VwbG9hZDpwcm9ncmVzcycsIHByb2dyZXNzXG5cbiAgICAgIHVwbG9hZGVyLmJpbmQgJ2ZpbGV1cGxvYWRzdGFydCcsIChlLCBkYXRhKSA9PlxuICAgICAgICBtb2RlbC50cmlnZ2VyICd1cGxvYWQ6c3RhcnQnLCBkYXRhXG5cbiAgICAgIHVwbG9hZGVyLmJpbmQgJ2ZpbGV1cGxvYWRzdG9wJywgKGUsIGRhdGEpID0+XG4gICAgICAgIG1vZGVsLnRyaWdnZXIgJ3VwbG9hZDpzdG9wJywgZGF0YVxuXG4gICAgICB1cGxvYWRlci5iaW5kICdmaWxldXBsb2FkZmFpbCcsIChlLCBkYXRhKSAtPlxuICAgICAgICBtb2RlbC50cmlnZ2VyICd1cGxvYWQ6ZXJyb3InLCBkYXRhXG5cbiAgICAjIGRlc3Ryb3k6ICgkZWwsIG1vZGVsLCBvcHRpb25zKSAtPlxuICAgICMgICAkZWwuZmlsZXVwbG9hZCAnZGVzdHJveSdcblxuXG4gICAgdXBkYXRlTW9kZWw6IGZhbHNlXG5cbiAgICB1cGRhdGVWaWV3OiBmYWxzZVxuIl19
