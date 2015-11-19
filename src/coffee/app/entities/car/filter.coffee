@@ -7,7 +7,7 @@ define ['app/app', 'base.entities'], (App, Entities) ->
       defaults:
         sort_by: 'createdAt'
         direction: -1
-        # query: {chars: 'заголовок'}
+        query: undefined
 
       changeDirection: (d) ->
         return unless _.isObject @get('sort')

@@ -35,13 +35,8 @@ define [
         'click @ui.directionBtn': 'toggleDirection'
 
       bindings:
-        '[name=chars]':
+        '[name=query]':
           observe: 'query'
-          onSet: (value) ->
-            {chars: value}
-
-          onGet: (value) ->
-            value.chars if value
 
         '[data-direction]':
           observe: 'direction'

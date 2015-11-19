@@ -39,7 +39,7 @@
 <div class="right menu">
   <div class="ui category search item">
     <form class="ui transparent icon input">
-      <input class="prompt" type="text" name="chars"
+      <input class="prompt" type="text" name="query"
         placeholder="Поиск по модели">
       <i class="search link icon"></i>
     </form>

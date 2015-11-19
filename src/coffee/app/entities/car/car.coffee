@@ -60,6 +60,14 @@ define ['app/app', 'base.entities', './photo'], (App, Entities) ->
       _sortByReverse_price: (model) ->
         - new Number model.get("price")
 
+      filterByModel: (chars) ->
+        return @models if _.isEmpty chars
+
+        pattern = new RegExp chars, "gi"
+        @filter (car) ->
+          pattern.test car.get("model")
+
+
     API =
       newCar: (args = {}) ->
         new Entities.Car args
@@ -111,7 +119,14 @@ define ['app/app', 'base.entities', './photo'], (App, Entities) ->
         alert.on 'deny', ->
           #
 
-      resortCars: (cars, filter) ->
+      refreshCars: (cars, filter) ->
+        # Filtering
+        query = filter.get('query')
+        models = App.reqres.request('car:entities')
+          .filterByModel(query)
+        cars.reset models
+
+        # Sorting
         reverse = if filter.get("direction") > 0 then "" else "Reverse"
         attr = filter.get('sort_by')
         funcName = "_sortBy#{reverse}_#{attr}"
@@ -121,6 +136,7 @@ define ['app/app', 'base.entities', './photo'], (App, Entities) ->
 
         cars.comparator = cars[funcName]
         cars.sort()
+
 
       populateCars: (cars) ->
         require ['app/entities/car/data'], (data) ->
@@ -146,8 +162,8 @@ define ['app/app', 'base.entities', './photo'], (App, Entities) ->
     App.commands.setHandler 'car:entity:destroy', (args...) ->
       API.destroyCar args...
 
-    App.commands.setHandler 'car:entities:resort', (args...) ->
-      API.resortCars args...
+    App.commands.setHandler 'car:entities:refresh', (args...) ->
+      API.refreshCars args...
 
     App.commands.setHandler 'car:entities:populate', (args...) ->
       API.populateCars args...

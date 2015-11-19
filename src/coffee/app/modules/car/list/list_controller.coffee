@@ -25,8 +25,8 @@ define ["app/app", "base.controllers", "./list_view"], (App)->
         view = new List.Menu
           model: filter
 
-        filter.on 'change:sort_by change:direction', (model) ->
-          App.commands.execute "car:entities:resort", cars, model
+        filter.on 'change', (model) ->
+          App.commands.execute "car:entities:refresh", cars, model
 
         @layout.showChildView 'menuRegion', view
 
