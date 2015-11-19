@@ -1,1 +1,5 @@
-define(["app/app","./error/error_handler","./flash/flash","./alert/alert","./car/car","./car/photo","./car/filter"],function(r){return r.Entities});
+define(['app/app', './error/error_handler', './flash/flash', './alert/alert', './car/car', './car/photo', './car/filter'], function(App) {
+  return App.Entities;
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9lbnRpdGllcy9tYWluLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFBLENBQU8sQ0FDTCxTQURLLEVBRUwsdUJBRkssRUFHTCxlQUhLLEVBSUwsZUFKSyxFQUtMLFdBTEssRUFNTCxhQU5LLEVBT0wsY0FQSyxDQUFQLEVBUUcsU0FBQyxHQUFEO1NBRUQsR0FBRyxDQUFDO0FBRkgsQ0FSSCIsImZpbGUiOiJhcHAvZW50aXRpZXMvbWFpbi5qcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyIsInNvdXJjZXNDb250ZW50IjpbImRlZmluZSBbXG4gICdhcHAvYXBwJ1xuICAnLi9lcnJvci9lcnJvcl9oYW5kbGVyJ1xuICAnLi9mbGFzaC9mbGFzaCdcbiAgJy4vYWxlcnQvYWxlcnQnXG4gICcuL2Nhci9jYXInXG4gICcuL2Nhci9waG90bydcbiAgJy4vY2FyL2ZpbHRlcidcbl0sIChBcHApIC0+XG5cbiAgQXBwLkVudGl0aWVzXG4iXX0=

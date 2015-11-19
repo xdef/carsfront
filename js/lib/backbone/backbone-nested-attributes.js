@@ -1,1 +1,350 @@
-!function(e,t){function n(e,n){return n&&t(e.relations).each(function(t){"one"==t.type?i(e,t,n):o(e,t,n)}),a(e),n}function i(n,i,o){var s=i.key,d=o[s],a=t(i).result("relatedModel");d&&(d=d instanceof e.Model?d:new a(d),r(n,d,i),o[s]=d)}function o(e,t,n){var i=t.key,o=n[i],d=n["deleted_"+i],a=e.get(i),l=a||c(t);return o=s(o),r(e,l,t),o&&l.set(o),d&&(delete n["deleted_"+i],d=s(d),l.deletedModels.set(d)),n[i]=l,n}function s(t){return t instanceof e.Collection?t.slice():t}function d(e){t(e.relations).each(function(t){var n=e.get(t.key);n&&n.each&&(n.each(function(e){d(e)}),n.deletedModels&&n.deletedModels.reset())})}function a(e){e._hasNestedAttributesEventsConfigured||(e.on("sync",d),e._hasNestedAttributesEventsConfigured=!0)}function r(e,t,n){t._hasEventBubblingConfigured||(e.listenTo(t,"add change nested:change remove",function(t,i){e.trigger("nested:change change:"+n.key,t,i)}),t._hasEventBubblingConfigured=!0)}function l(e){t(e.relations).each(function(t){var n=e.get(t.key);e.stopListening(n),n.off("remove",f,n),n.deletedModels&&n.deletedModels.reset()},e)}function u(e,n,i){return t(n).each(function(n){var o,s=n.key,d=e[s],a=[];d&&(i&&(i.withDeleted&&d.deletedModels&&(e["deleted_"+s]=d.deletedModels.toJSON(i)),i.nested&&(d.deletedModels&&(a=d.deletedModels.toJSON(i)),delete e[s],s+="_attributes")),o=d.toJSON(i),t(o).isArray()&&(o=o.concat(a)),d&&i&&i.nested&&n.serialize_keys&&(o=t(o).isArray()?t.map(o,function(e){return t.pick(e,n.serialize_keys)}):t.pick(o,n.serialize_keys)),e[s]=o)}),e}function c(n){var i=t(n).result("collectionType")||e.Collection,o=new i;return o.model=t(n).result("relatedModel")||o.model,o.destroy_action=n.destroy_action||"_destroy",n.serialize_keys&&n.serialize_keys.push(o.destroy_action),o.deletedModels=new e.Collection,o.deletedModels.model=o.model,o.on("add",h),o.on("remove",f),o}function h(e,t){e.get(t.destroy_action)&&e.unset(t.destroy_action,{silent:!0}),e.isNew()||t.deletedModels.remove(e)}function f(e,t){e.isNew()||(param={},param[t.destroy_action]=!0,e.set(param,{silent:!0}),t.deletedModels.add(e))}var g=e.Model.prototype;e.NestedAttributesModel=e.Model.extend({set:function(e,i,o){var s;return t.isObject(e)||null==e?(s=e,o=i):(s={},s[e]=i),g.set.call(this,n(this,s),o)},toJSON:function(e){return u(g.toJSON.apply(this,arguments),this.relations,e)},clone:function(){return new this.constructor(this.toJSON())},clear:function(e){return l(this),g.clear.apply(this,arguments)}})}(Backbone,_),function(e,t){function n(e){this.model=e,e.on("nested:change",this.change,this),e.on("change",this.change,this),e.on("sync",this.save,this)}var i=e.NestedAttributesModel,o=i.prototype;t.extend(n.prototype,e.Events,{change:function(){this.changed=!0},save:function(){this.updateAttributes(),this.model.trigger("state:store")},undo:function(){this.attributesToUnset().each(function(e){this.model.unset(e)},this),this.model.set(this.attributes),this.updateAttributes(),this.model.trigger("state:restore")},attributesToUnset:function(){var e=t(this.attributes||{}).keys();return t(this.model.attributes).chain().keys().select(function(n){return!t(e).include(n)})},updateAttributes:function(){this.attributes=this.model.toJSON({withDeleted:!0}),this.changed=!1}}),e.UndoableModel=i.extend({initialize:function(){o.initialize.apply(this,arguments),this.undoable()},undoable:function(){this.saveState()},undo:function(){this.undoableState().undo()},hasChangedSinceSync:function(){return this.undoableState().changed===!0},saveState:function(){this.undoableState().save()},undoableState:function(){return this._undoableState=this._undoableState||new n(this)}})}(Backbone,_);
+/**
+ * Copyright (c) 2013-2014 Vicente Mundim
+ *
+ * Version: 0.5.0
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+
+;
+(function(Backbone, _) {
+  var BackboneModelPrototype = Backbone.Model.prototype
+
+  function setNestedAttributes(model, attributes) {
+    if (attributes) {
+      _(model.relations).each(function (relation) {
+        if (relation.type == 'one') {
+          setHasOneNestedAttributeFor(model, relation, attributes)
+        } else {
+          setNestedAttributeFor(model, relation, attributes)
+        }
+      })
+    }
+
+    configureNestedAttributesEvents(model)
+
+    return attributes
+  }
+
+  function setHasOneNestedAttributeFor(model, relation, attributes) {
+    var key           = relation.key,
+        value         = attributes[key],
+        ModelClass    = _(relation).result('relatedModel')
+
+    if (value) {
+      value = value instanceof Backbone.Model ? value : new ModelClass(value)
+
+      configureEventBubbling(model, value, relation)
+      attributes[key] = value
+    }
+  }
+
+  function setNestedAttributeFor(model, relation, attributes) {
+    var key           = relation.key,
+        value         = attributes[key],
+        deletedValue  = attributes['deleted_' + key],
+        currentValue  = model.get(key),
+        nested        = currentValue || createNestedAttributeCollection(relation)
+
+    value = valueOrSliceCollection(value)
+
+    configureEventBubbling(model, nested, relation)
+
+    if (value) {
+      nested.set(value)
+    }
+
+    if (deletedValue) {
+      delete attributes['deleted_' + key]
+
+      deletedValue = valueOrSliceCollection(deletedValue)
+      nested.deletedModels.set(deletedValue)
+    }
+
+    attributes[key] = nested
+
+    return attributes
+  }
+
+  function valueOrSliceCollection(value) {
+    return value instanceof Backbone.Collection ? value.slice() : value
+  }
+
+  function clearDeletedModelsFor(model) {
+    _(model.relations).each(function (relation) {
+      var collectionOrModel = model.get(relation.key)
+
+      if (collectionOrModel && collectionOrModel.each) {
+        collectionOrModel.each(function (nestedModel) {
+          clearDeletedModelsFor(nestedModel)
+        })
+
+        if (collectionOrModel.deletedModels) {
+          collectionOrModel.deletedModels.reset()
+        }
+      }
+    })
+  }
+
+  function configureNestedAttributesEvents(model) {
+    if (!model._hasNestedAttributesEventsConfigured) {
+      model.on('sync', clearDeletedModelsFor)
+      model._hasNestedAttributesEventsConfigured = true
+    }
+  }
+
+  function configureEventBubbling(model, nested, relation) {
+    if (!nested._hasEventBubblingConfigured) {
+      model.listenTo(nested, 'add change nested:change remove', function (nestedModel, options) {
+        model.trigger('nested:change change:' + relation.key, nestedModel, options)
+      })
+
+      nested._hasEventBubblingConfigured = true
+    }
+  }
+
+  function clearNestedEvents(model) {
+    _(model.relations).each(function (relation) {
+      var nested = model.get(relation.key)
+
+      model.stopListening(nested)
+      nested.off('remove', nestedModelRemoved, nested)
+
+      if (nested.deletedModels) {
+        nested.deletedModels.reset()
+      }
+    }, model)
+  }
+
+  function nestedToJson(json, relations, options) {
+    _(relations).each(function (relation) {
+      var key     = relation.key,
+          value   = json[key],
+          deleted = [],
+          jsonValue
+
+      if (value) {
+        if (options) {
+          if (options.withDeleted) {
+            if (value.deletedModels) {
+              json['deleted_' + key] = value.deletedModels.toJSON(options)
+            }
+          }
+
+          if (options.nested) {
+            if (value.deletedModels) {
+              deleted = value.deletedModels.toJSON(options)
+            }
+
+            delete json[key]
+            key = key + '_attributes'
+          }
+        }
+
+        jsonValue = value.toJSON(options)
+
+        if (_(jsonValue).isArray()) {
+          jsonValue = jsonValue.concat(deleted)
+        }
+
+        if (value) {
+          if (options && options.nested) {
+            if (relation.serialize_keys) {
+              if (_(jsonValue).isArray()) {
+                jsonValue = _.map(jsonValue, function(j) { return _.pick(j, relation.serialize_keys) })
+              } else {
+                jsonValue = _.pick(jsonValue, relation.serialize_keys)
+              }
+            }
+          }
+        }
+
+        json[key] = jsonValue
+      }
+    })
+
+    return json
+  }
+
+  function createNestedAttributeCollection(relation) {
+    var CollectionType = _(relation).result('collectionType') || Backbone.Collection,
+        collection     = new CollectionType
+
+    collection.model = _(relation).result('relatedModel') || collection.model
+    collection.destroy_action = relation.destroy_action || '_destroy'
+
+    if (relation.serialize_keys) {
+      relation.serialize_keys.push(collection.destroy_action)
+    }
+
+    collection.deletedModels = new Backbone.Collection
+    collection.deletedModels.model = collection.model
+    collection.on('add', nestedModelAdded)
+    collection.on('remove', nestedModelRemoved)
+
+    return collection
+  }
+
+  function nestedModelAdded(model, collection) {
+    if (model.get(collection.destroy_action)) {
+      model.unset(collection.destroy_action, {silent: true})
+    }
+
+    if (!model.isNew()) {
+      collection.deletedModels.remove(model)
+    }
+  }
+
+  function nestedModelRemoved(model, collection) {
+    if (!model.isNew()) {
+      param = {}
+      param[collection.destroy_action] = true
+      model.set(param, {silent: true})
+      collection.deletedModels.add(model)
+    }
+  }
+
+  function attributesFor(key, value, options) {
+    var attributes
+
+    // Duplicate backbone's behavior to allow separate key/value parameters,
+    // instead of a single 'attributes' object.
+    if (_.isObject(key) || key == null) {
+      attributes = key
+      options = value
+    } else {
+      attributes = {}
+      attributes[key] = value
+    }
+
+    return attributes
+  }
+
+  Backbone.NestedAttributesModel = Backbone.Model.extend({
+    set: function (key, value, options) {
+      var attributes
+
+      // Duplicate backbone's behavior to allow separate key/value parameters,
+      // instead of a single 'attributes' object.
+      if (_.isObject(key) || key == null) {
+        attributes = key
+        options = value
+      } else {
+        attributes = {}
+        attributes[key] = value
+      }
+
+      return BackboneModelPrototype.set.call(this, setNestedAttributes(this, attributes), options)
+    },
+
+    toJSON: function (options) {
+      return nestedToJson(BackboneModelPrototype.toJSON.apply(this, arguments), this.relations, options)
+    },
+
+    clone: function() {
+      return new this.constructor(this.toJSON());
+    },
+
+    clear: function (options) {
+      clearNestedEvents(this)
+      return BackboneModelPrototype.clear.apply(this, arguments)
+    }
+  })
+})(Backbone, _);
+(function(Backbone, _) {
+  var NestedAttributesModel      = Backbone.NestedAttributesModel,
+      NestedAttributesModelProto = NestedAttributesModel.prototype
+
+  function UndoableState(model) {
+    this.model = model
+
+    model.on('nested:change', this.change, this)
+    model.on('change',        this.change, this)
+    model.on('sync',          this.save,   this)
+  }
+
+  _.extend(UndoableState.prototype, Backbone.Events, {
+    change: function () {
+      this.changed = true
+    },
+
+    save: function () {
+      this.updateAttributes()
+
+      this.model.trigger('state:store')
+    },
+
+    undo: function () {
+      this.attributesToUnset().each(function (attribute) {
+        this.model.unset(attribute)
+      }, this)
+
+      this.model.set(this.attributes)
+
+      this.updateAttributes()
+
+      this.model.trigger('state:restore')
+    },
+
+    attributesToUnset: function () {
+      var previousAttributes = _(this.attributes || {}).keys()
+
+      return _(this.model.attributes).chain().keys().select(function (attribute) {
+        return !_(previousAttributes).include(attribute)
+      })
+    },
+
+    updateAttributes: function () {
+      this.attributes = this.model.toJSON({ withDeleted: true })
+      this.changed = false
+    }
+  })
+
+  Backbone.UndoableModel = NestedAttributesModel.extend({
+    initialize: function () {
+      NestedAttributesModelProto.initialize.apply(this, arguments)
+
+      this.undoable()
+    },
+
+    undoable: function () {
+      this.saveState()
+    },
+
+    undo: function () {
+      this.undoableState().undo()
+    },
+
+    hasChangedSinceSync: function () {
+      return this.undoableState().changed === true
+    },
+
+    saveState: function () {
+      this.undoableState().save()
+    },
+
+    undoableState: function () {
+      return this._undoableState = this._undoableState || new UndoableState(this)
+    }
+  })
+})(Backbone, _);

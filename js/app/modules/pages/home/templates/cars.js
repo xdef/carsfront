@@ -1,1 +1,60 @@
-window.JST||(window.JST={}),window.JST["pages/home/templates/cars"]=function(e){e||(e={});var n,a=[],i=function(e){return e&&e.ecoSafe?e:"undefined"!=typeof e&&null!=e?t(e):""},s=e.safe,t=e.escape;return n=e.safe=function(e){if(e&&e.ecoSafe)return e;("undefined"==typeof e||null==e)&&(e="");var n=new String(e);return n.ecoSafe=!0,n},t||(t=e.escape=function(e){return(""+e).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}),function(){(function(){a.push('<h2 class="ui dividing header">\n  Последние добавленные автомобили\n  <div class="sub header">\n    Всего: '),a.push(i(this.total)),a.push('\n  </div>\n</h2>\n\n<div class="ui four link cards"></div>\n\n'),this.total>this.size&&a.push('\n<div class="ui basic center aligned segment">\n  <a href="#!/car" class="ui huge red inverted button">\n    Показать все\n  </a>\n</div>\n'),a.push("\n")}).call(this)}.call(e),e.safe=s,e.escape=t,a.join("")};
+if (!window.JST) {
+  window.JST = {};
+}
+window.JST["pages/home/templates/cars"] = function (__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      __out.push('<h2 class="ui dividing header">\n  Последние добавленные автомобили\n  <div class="sub header">\n    Всего: ');
+    
+      __out.push(__sanitize(this.total));
+    
+      __out.push('\n  </div>\n</h2>\n\n<div class="ui four link cards"></div>\n\n');
+    
+      if (this.total > this.size) {
+        __out.push('\n<div class="ui basic center aligned segment">\n  <a href="#!/car" class="ui huge red inverted button">\n    Показать все\n  </a>\n</div>\n');
+      }
+    
+      __out.push('\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
