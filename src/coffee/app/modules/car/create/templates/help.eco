@@ -1,0 +1,48 @@
+<div class="item">
+  <i class="asterisk large grey icon"></i>
+  <div class="content">
+    <div class="header">
+      Обязательное поле
+    </div>
+    <div class="description">
+      Поля помеченные звездочкой обязательны к заполнению
+    </div>
+  </div>
+</div>
+
+<div class="item">
+  <i class="money large grey icon"></i>
+  <div class="content">
+    <div class="header">
+      Стоимость
+    </div>
+    <div class="description">
+      Значение стоимости автомобиля может варьировться 0.01 до 999999. Максимальное
+      число знаков после запятой 2
+    </div>
+  </div>
+</div>
+
+<div class="item">
+  <i class="calendar large grey icon"></i>
+  <div class="content">
+    <div class="header">
+      Год выпуска
+    </div>
+    <div class="description">
+      Допустимые значения года выпуска автомобиля от 1900 до <%= moment().year() %>
+    </div>
+  </div>
+</div>
+
+<div class="item">
+  <i class="picture large grey icon"></i>
+  <div class="content">
+    <div class="header">
+      Фото
+    </div>
+    <div class="description">
+      В качестве фото возможно использовать только внешние ссылки. Количество фотографий не ограничено
+    </div>
+  </div>
+</div>

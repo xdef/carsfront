@@ -1,0 +1,54 @@
+<div class="required field">
+  <label for="model">Модель автомобиля</label>
+  <div class="ui input">
+    <input type="text" id="model" name="model"
+      placeholder="Пример: ВАЗ">
+  </div>
+</div>
+
+<div class="fields">
+  <div class="required eight wide field">
+    <label for="price">Стоимость автомобиля</label>
+    <div class="ui labeled input">
+      <div class="ui left icon input">
+        <input type="text" id="price" name="price"
+          placeholder="0.00"
+          data-inputmask="'numeric': true, 'digits': 2, 'min': 0, 'max': 100000, 'allowPlus': false, 'allowMinus': false">
+        <i class="dollar icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="required eight wide field">
+    <label for="year">Год выпуска</label>
+    <div class="ui left icon input">
+      <input type="text" id="year" name="year"
+        placeholder="Пример: 2001"
+        data-inputmask="'alias': 'numeric', 'digits': 0, 'min': 1900, 'max': <%= moment().year() %>, 'allowPlus': false, 'allowMinus': false">
+      <i class="clock icon"></i>
+    </div>
+  </div>
+</div>
+
+<div class="required field">
+  <label for="description">Описание</label>
+  <textarea id="description" name="description" rows="6"
+    placeholder="Пример: состояние отличное, не бит, не крашен"></textarea>
+</div>
+
+<div class="field">
+  <label for="photo">Фотографии</label>
+  <div class="ui special four cards"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui action fluid input">
+    <input type="text" id="photo" name="photo" placeholder="Пример: http://placehold.it/128x128.png">
+    <a href="javascript:void(null);" class="add-photo ui icon red button">
+      <i class="plus icon"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Form submit -->
+<div class="ui basic segment center aligned field">
+  <a href="javascript:void(null);" class="ui cancel button">Отмена</a>
+  <button type="submit" class="ui submit red button">Сохранить</button>
+</div>

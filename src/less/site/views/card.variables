@@ -1,0 +1,10 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+/* Header */
+@headerMargin: '';
+@headerFontWeight: normal;
+@headerFontSize: @relativeBig;
+@headerLineHeightOffset: -(@lineHeight - 1em) / 2;
+@headerColor: @darkTextColor;

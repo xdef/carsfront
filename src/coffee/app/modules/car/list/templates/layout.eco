@@ -1,0 +1,8 @@
+<!-- Menu -->
+<div id="menu-region" class="ui basic segment"></div>
+
+<!-- List -->
+<div id="list-region" class="ui basic segment"></div>
+
+<!-- Load more -->
+<div id="more-region" class="ui basic segment"></div>

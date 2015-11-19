@@ -1,0 +1,34 @@
+<div class="image">
+  <% if @photos.length: %>
+  <img src="<%= @photos[0].url %>">
+  <% end %>
+</div>
+<div class="content">
+  <a href="/#!/car/<%= @id %>" class="header">
+    <%= @model %> (<%= @year %> г.)
+  </a>
+  <div class="meta">
+    <a href="/#!/car/<%= @id %>/edit">
+      <i class="edit icon"></i>
+      Редактировать
+    </a>
+    <a href="javascript:void(null);" class="delete">
+      <i class="trash icon"></i>
+      Удалить
+    </a>
+  </div>
+  <div class="description">
+    <p><%= @description %></p>
+  </div>
+  <div class="extra">
+    <span>
+      <i class="calendar icon"></i>
+      <%= @formatedDate @createdAt %>
+    </span>
+    &nbsp;
+    <span>
+      <i class="dollar fitted icon"></i>
+      <%= @price %>
+    </span>
+  </div>
+</div>

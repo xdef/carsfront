@@ -1,0 +1,16 @@
+<div class="ui divided grid">
+  <!-- Header of page -->
+  <div id="header-region" class="one column row"></div>
+
+  <div class="row">
+    <!-- Help region -->
+    <div class="six wide column">
+      <div id="help-region" class="ui basic segment"></div>
+    </div>
+
+    <!-- Form region -->
+    <div class="ten wide column">
+      <div id="form-region" class="ui basic segment"></div>
+    </div>
+  </div>
+</div>

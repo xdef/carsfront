@@ -1,0 +1,35 @@
+<div class="ui small statistics">
+  <div class="statistic">
+    <div class="value">
+      <%= @year %>
+    </div>
+    <div class="label">
+      Год выпуска
+    </div>
+  </div>
+
+  <div class="statistic">
+    <div class="value">
+      <i class="dollar icon"></i> <%= @price %>
+    </div>
+    <div class="label">
+      Стоимость
+    </div>
+  </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<p>
+  <%= @description %>
+</p>
+
+<div class="ui four cards">
+  <% for photo in @photos: %>
+  <div class="card">
+    <div class="image">
+      <img src="<%= photo.url %>" alt="">
+    </div>
+  </div>
+  <% end %>
+</div>

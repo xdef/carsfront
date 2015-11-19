@@ -1,0 +1,21 @@
+<div class="ui icon header">
+  <i class="<%= @icon %>"></i>
+  <%= @header %>
+</div>
+
+<div class="image content">
+  <div class="description">
+    <p class="text-center"><%- @message %></p>
+  </div>
+</div>
+
+<div class="actions">
+  <div class="ui cancel red basic inverted button">
+    <i class="remove icon"></i>
+    <%= @actions.cancel %>
+  </div>
+  <div class="ui ok green basic inverted button">
+    <i class="checkmark icon"></i>
+    <%= @actions.ok %>
+  </div>
+</div>

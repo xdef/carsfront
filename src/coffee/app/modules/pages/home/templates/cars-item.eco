@@ -1,0 +1,16 @@
+<% if @photos.length: %>
+<div class="image">
+  <img src="<%= @photos[0].url %>">
+</div>
+<div class="content">
+  <div class="header">
+    <%= @model %>
+  </div>
+  <div class="meta">
+    <span class="price">
+      Стоимость:
+      <i class="dollar fitted icon"></i>
+      <%= @price %>
+    </span>
+  </div>
+</div>

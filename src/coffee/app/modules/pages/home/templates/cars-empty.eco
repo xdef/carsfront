@@ -1,0 +1,14 @@
+<div class="ui icon message">
+  <i class="frown icon"></i>
+  <div class="content">
+    <div class="header">
+      База автомобилей пуста
+    </div>
+    <p>
+      В локальном хранилище пока нет автомобилей.
+      Но вы можете их <a href="/#!/car/create">создать</a>. <br>
+      Также для тестирования приложения можно <a href="javascript:void(null);" class="populate">наполнить базу</a>
+      тестовыми данными
+    </p>
+  </div>
+</div>

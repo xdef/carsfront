@@ -1,0 +1,28 @@
+<div class="ui container">
+  <a class="item" href="/#!/home">
+    <img class="ui small image" src="/images/app-logo.png">
+  </a>
+
+  <div class="right labeled menu">
+    <a class="item login" href="/#!/home">
+      <i class="home icon"></i>
+      Главная
+    </a>
+    <a class="item login" href="/#!/about-us">
+      <i class="comment icon"></i>
+      О Нас
+    </a>
+    <div class="ui dropdown link item">
+      <i class="car icon"></i>
+      Автомобили
+      <div class="menu">
+        <a href="/#!/car/create" class="item">
+          Добавить автомобиль
+        </a>
+        <a href="/#!/car" class="item">
+          Показать все
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

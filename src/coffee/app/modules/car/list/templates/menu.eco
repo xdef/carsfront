@@ -1,0 +1,47 @@
+<a
+  data-direction
+  class="direction item"
+  data-popup
+  data-content="Направление сортировки"
+  data-position="bottom left">
+  <i class="sort content large icon"></i>
+</a>
+
+<div class="ui dropdown item">
+  <input type="hidden" name="sortBy" value="1">
+  <div class="default text">
+    ...
+  </div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    <div class="header">
+      <i class="sort icon"></i>
+      Сортировать по
+    </div>
+    <div class="item"
+      data-value="1"
+      data-text="Сортировать по дате создания"
+      data-attr='createdAt'>
+      Дата создания
+    </div>
+
+    <div class="item"
+      data-value="2"
+      data-text="Сортировать по стоимости"
+      data-attr='price'>
+      Стоимость
+    </div>
+
+    <!-- <div class="item" data-value="5" data-text="Сортировать по популярности">Популярность</div> -->
+  </div>
+</div>
+
+<div class="right menu">
+  <div class="ui category search item">
+    <form class="ui transparent icon input">
+      <input class="prompt" type="text" name="chars"
+        placeholder="Поиск по модели">
+      <i class="search link icon"></i>
+    </form>
+  </div>
+</div>

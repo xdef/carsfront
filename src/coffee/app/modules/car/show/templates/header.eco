@@ -1,0 +1,15 @@
+<h1 class="ui dividing header">
+  <%= @model %> (<%= @year %> г.)
+  <div class="sub header">
+    <div class="ui link horizontal list">
+      <a href="/#!/car/<%= @id %>/edit" class="item">
+        <i class="edit icon"></i>
+        Редактировать
+      </a>
+      <a href="javascript:void(null);" class="delete item">
+        <i class="trash icon"></i>
+        Удалить
+      </a>
+    </div>
+  </div>
+</h1>

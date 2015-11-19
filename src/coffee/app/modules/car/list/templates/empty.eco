@@ -1,0 +1,10 @@
+<i class="frown icon"></i>
+<div class="content">
+  <div class="header">
+    База автомобилей пуста
+  </div>
+  <p>
+    В локальном хранилище пока нет автомобилей.
+    Но вы можете их <a href="/#!/car/create">создать</a>
+  </p>
+</div>
