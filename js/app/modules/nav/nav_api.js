@@ -1,0 +1,1 @@
+define(["app/app","./show/show_controller"],function(n,o){var e;return e={show:function(){return new o({region:n.navRegion})}}});

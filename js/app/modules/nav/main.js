@@ -1,0 +1,1 @@
+define(["app/app","./nav_api"],function(n,t){return n.module("Home",function(n,u,e,o,r,a){return n.on("start",function(n){return null==n&&(n={}),t.show()})})});

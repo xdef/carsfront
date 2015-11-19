@@ -1,0 +1,1 @@
+define(["underscore"],function(e){return e.extend({key:"value"},window.Config)});

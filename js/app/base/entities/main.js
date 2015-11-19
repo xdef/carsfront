@@ -1,0 +1,1 @@
+define(["app/app","./sync","./model","./collection"],function(n){return n.Entities});

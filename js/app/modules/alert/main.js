@@ -1,0 +1,1 @@
+define(["app/app","./alert_api"],function(e,r){return e.module("Alert",function(e,n,t,u,a,l){return n.reqres.setHandler("alert:window",function(e){var t;return null==e&&(e={}),(t=n.reqres.request("alert:entity",e))&&r.show(t),t})})});

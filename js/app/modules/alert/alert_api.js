@@ -1,0 +1,1 @@
+define(["app/app","./show/show_controller"],function(o){var n;return n={show:function(n){return new o.Alert.Show.Controller({alert:n,region:o.modalRegion})}}});

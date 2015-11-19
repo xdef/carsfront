@@ -1,0 +1,1 @@
+define(["app/app","./controller"],function(n){return n.Controllers});

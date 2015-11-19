@@ -1,0 +1,1 @@
+define(["backbone","backbone.stickit","jquery.inputmask"],function(){return Backbone.Stickit.addHandler({selector:"input[data-inputmask]",initialize:function(t,i,n){var e;return e=_.defaults({},n.defaultOptions,{rightAlign:!1}),t.inputmask(n.inputFilter,e)},destroy:function(t,i,n){}})});
