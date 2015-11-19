@@ -1,5 +1,1 @@
-define(['app/app', './controller'], function(App) {
-  return App.Controllers;
-});
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9iYXNlL2NvbnRyb2xsZXJzL21haW4uY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQUEsQ0FBTyxDQUNMLFNBREssRUFFTCxjQUZLLENBQVAsRUFHRyxTQUFDLEdBQUQ7U0FFRCxHQUFHLENBQUM7QUFGSCxDQUhIIiwiZmlsZSI6ImFwcC9iYXNlL2NvbnRyb2xsZXJzL21haW4uanMiLCJzb3VyY2VSb290IjoiL3NvdXJjZS8iLCJzb3VyY2VzQ29udGVudCI6WyJkZWZpbmUgW1xuICAnYXBwL2FwcCdcbiAgJy4vY29udHJvbGxlcidcbl0sIChBcHApIC0+XG5cbiAgQXBwLkNvbnRyb2xsZXJzXG4iXX0=
+define(["app/app","./controller"],function(n){return n.Controllers});
