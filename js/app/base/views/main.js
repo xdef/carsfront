@@ -1,5 +1,1 @@
-define(["app/app", "./view", "./item_view", "./collection_view", "./composite_view", "./layout_view", "./template_helpers"], function(App) {
-  return App.Views;
-});
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9iYXNlL3ZpZXdzL21haW4uY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQUEsQ0FBTyxDQUNMLFNBREssRUFFTCxRQUZLLEVBR0wsYUFISyxFQUlMLG1CQUpLLEVBS0wsa0JBTEssRUFNTCxlQU5LLEVBT0wsb0JBUEssQ0FBUCxFQVFHLFNBQUMsR0FBRDtTQUVELEdBQUcsQ0FBQztBQUZILENBUkgiLCJmaWxlIjoiYXBwL2Jhc2Uvdmlld3MvbWFpbi5qcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyIsInNvdXJjZXNDb250ZW50IjpbImRlZmluZSBbXG4gIFwiYXBwL2FwcFwiLFxuICBcIi4vdmlld1wiLFxuICBcIi4vaXRlbV92aWV3XCIsXG4gIFwiLi9jb2xsZWN0aW9uX3ZpZXdcIixcbiAgXCIuL2NvbXBvc2l0ZV92aWV3XCJcbiAgXCIuL2xheW91dF92aWV3XCIsXG4gIFwiLi90ZW1wbGF0ZV9oZWxwZXJzXCJcbl0sIChBcHApIC0+XG5cbiAgQXBwLlZpZXdzXG4iXX0=
+define(["app/app","./view","./item_view","./collection_view","./composite_view","./layout_view","./template_helpers"],function(e){return e.Views});
