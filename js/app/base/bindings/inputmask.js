@@ -1,15 +1,1 @@
-define(['backbone', 'backbone.stickit', 'jquery.inputmask'], function() {
-  return Backbone.Stickit.addHandler({
-    selector: "input[data-inputmask]",
-    initialize: function($el, model, options) {
-      var defaults;
-      defaults = _.defaults({}, options.defaultOptions, {
-        rightAlign: false
-      });
-      return $el.inputmask(options.inputFilter, defaults);
-    },
-    destroy: function($el, model, options) {}
-  });
-});
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9iYXNlL2JpbmRpbmdzL2lucHV0bWFzay5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBQSxDQUFPLENBQ0wsVUFESyxFQUVMLGtCQUZLLEVBR0wsa0JBSEssQ0FBUCxFQUlHLFNBQUE7U0FFRCxRQUFRLENBQUMsT0FBTyxDQUFDLFVBQWpCLENBQ0U7SUFBQSxRQUFBLEVBQVUsdUJBQVY7SUFFQSxVQUFBLEVBQVksU0FBQyxHQUFELEVBQU0sS0FBTixFQUFhLE9BQWI7QUFDVixVQUFBO01BQUEsUUFBQSxHQUFXLENBQUMsQ0FBQyxRQUFGLENBQVcsRUFBWCxFQUFlLE9BQU8sQ0FBQyxjQUF2QixFQUNUO1FBQUEsVUFBQSxFQUFZLEtBQVo7T0FEUzthQUdYLEdBQUcsQ0FBQyxTQUFKLENBQWMsT0FBTyxDQUFDLFdBQXRCLEVBQW1DLFFBQW5DO0lBSlUsQ0FGWjtJQVFBLE9BQUEsRUFBUyxTQUFDLEdBQUQsRUFBTSxLQUFOLEVBQWEsT0FBYixHQUFBLENBUlQ7R0FERjtBQUZDLENBSkgiLCJmaWxlIjoiYXBwL2Jhc2UvYmluZGluZ3MvaW5wdXRtYXNrLmpzIiwic291cmNlUm9vdCI6Ii9zb3VyY2UvIiwic291cmNlc0NvbnRlbnQiOlsiZGVmaW5lIFtcbiAgJ2JhY2tib25lJ1xuICAnYmFja2JvbmUuc3RpY2tpdCdcbiAgJ2pxdWVyeS5pbnB1dG1hc2snXG5dLCAtPlxuXG4gIEJhY2tib25lLlN0aWNraXQuYWRkSGFuZGxlclxuICAgIHNlbGVjdG9yOiBcImlucHV0W2RhdGEtaW5wdXRtYXNrXVwiXG5cbiAgICBpbml0aWFsaXplOiAoJGVsLCBtb2RlbCwgb3B0aW9ucykgLT5cbiAgICAgIGRlZmF1bHRzID0gXy5kZWZhdWx0cyB7fSwgb3B0aW9ucy5kZWZhdWx0T3B0aW9ucyxcbiAgICAgICAgcmlnaHRBbGlnbjogZmFsc2VcblxuICAgICAgJGVsLmlucHV0bWFzayhvcHRpb25zLmlucHV0RmlsdGVyLCBkZWZhdWx0cylcblxuICAgIGRlc3Ryb3k6ICgkZWwsIG1vZGVsLCBvcHRpb25zKSAtPlxuICAgICAgI1xuIl19
+define(["backbone","backbone.stickit","jquery.inputmask"],function(){return Backbone.Stickit.addHandler({selector:"input[data-inputmask]",initialize:function(t,i,n){var e;return e=_.defaults({},n.defaultOptions,{rightAlign:!1}),t.inputmask(n.inputFilter,e)},destroy:function(t,i,n){}})});
